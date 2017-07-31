@@ -1,0 +1,28 @@
+{
+	"manifest_version": 2,
+
+	"name": "Select and Zoom",
+	"description": "This extension displays selected text in larger font size.",
+	"version": "1.0",
+
+	"content_scripts": [{
+		"matches": ["http://*/*", "https://*/*"],
+		"css": ["main.css"],
+		"js": ["jquery.min.js", "main.js"],
+		"run_at": "document_end"
+	}],
+
+	"background": {
+		"scripts": ["background.js"]
+	},
+
+	"browser_action": {
+		"default_icon": "icon.png"
+	},
+
+	"permissions": [
+		"activeTab",
+		"tabs",
+		"http://*/*", "https://*/*"
+	]
+}

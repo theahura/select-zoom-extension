@@ -1,0 +1,10 @@
+#selectZoomHover {
+	font-size: 50px;
+	margin-bottom: 20px;
+	top: 420px;
+	border-radius: 5px;
+	width: 90%;
+	position: fixed;
+	left: 50%;
+	margin-left: -45%;
+}
