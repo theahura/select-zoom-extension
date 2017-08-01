@@ -1,10 +1,19 @@
 #selectZoomHover {
 	font-size: 50px;
-	margin-bottom: 20px;
-	top: 420px;
+	bottom: 5px;
+	height: 200px;
 	border-radius: 5px;
 	width: 90%;
 	position: fixed;
 	left: 50%;
 	margin-left: -45%;
+	overflow: scroll;
+	display: none;
+
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; 
 }

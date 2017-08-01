@@ -3,6 +3,10 @@
 	var enabled = true;
 	var maxLen = 60;
 
+	chrome.runtime.sendMessage({}, function(response) {
+			enabled = response;
+	});
+
 	function getSelectionText() {
 		var text = "";
 		var activeEl = document.activeElement;
@@ -24,21 +28,18 @@
 
 	chrome.runtime.onMessage.addListener(function(request, sender) { 
 		if (request.action && request.action === 'toggle') {
-			if (enabled) 
-				alert("Disabled vision zoom.");
-			else 
-				alert("Enabled vision zoom.");
+			enabled = request.value;
 
-			$('#selectZoomHover').toggle();
-			enabled = !enabled;
+			if (!enabled)
+				$('#selectZoomHover').hide();
 		}
 	});
 
 	document.onmouseup = document.onkeyup = document.onselectionchange = function() {
 		var selectedText = getSelectionText();
 		if (selectedText) {
-			if (selectedText.length > maxLen)
-				selectedText = selectedText.substr(selectedText.length - maxLen);
+			//if (selectedText.length > maxLen)
+			//	selectedText = selectedText.substr(selectedText.length - maxLen);
 			$('#selectZoomHover').html(selectedText);
 			if (enabled)
 				$('#selectZoomHover').show();
