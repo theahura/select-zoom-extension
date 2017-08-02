@@ -9,6 +9,8 @@
 	margin-left: -45%;
 	overflow: scroll;
 	display: none;
+	line-height: 45px;
+	z-index:1000;
 
   -webkit-touch-callout: none; /* iOS Safari */
     -webkit-user-select: none; /* Safari */
