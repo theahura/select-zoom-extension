@@ -11,6 +11,9 @@
 	display: none;
 	line-height: 45px;
 	z-index:1000;
+	border-style: solid;
+	border-width: 2px;
+	color: black;
 
   -webkit-touch-callout: none; /* iOS Safari */
     -webkit-user-select: none; /* Safari */

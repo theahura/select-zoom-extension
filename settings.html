@@ -2,6 +2,7 @@
 <html>
   <head>
     <title>Select and Zoom Settings</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 		<style>
 
 			ul, li {
@@ -18,6 +19,39 @@
 			.settings li {
 				margin: 90px;
 				font-size: 50px;
+				vertical-align: middle;
+			}
+
+			.settings li input {
+				float: right;
+			}
+
+			.settings li input[type=number] {
+				margin-left: 20px;
+				width: 100px;	
+				padding: 20px;
+				text-align: center;
+				font-size: 30px;
+
+				vertical-align: middle;
+			}
+
+			.settings li input[type=color] {
+				margin-left: 20px;
+				width: 100px;	
+				padding: 20px;
+				text-align: center;
+				font-size: 30px;
+
+				vertical-align: middle;
+			}
+
+			.settings li input[type=checkbox] {
+				margin-left: 20px;
+				width: 50px;	
+				height: 50px;
+
+				vertical-align: middle;
 			}
 
 		</style>
@@ -25,15 +59,16 @@
   <body>
 		<ul class='settings'>
 			<li>
-				Font Size: <input type="text" value="50"></br>
+				Font Size: <input type="number" value="50"></br>
 		  </li>
 		  <li>
-				Background Color: <input type="color"></br>
+				Background: <input type="color" value="#dcdcdc"></br>
 			</li>
 			<li>
-				Enabled: <input type="checkbox">
+				Enabled: <input class='enabled' type="checkbox">
 			</li>
 		</ul>
+	<script src='popup.js'></script>
   </body>
 </html>
 

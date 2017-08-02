@@ -24,7 +24,8 @@
 	}
 
 	$('body').append('<div id="selectZoomHover"></div>');
-	$('#selectZoomHover').css('background-color', 'rgba(66, 134, 244, 0.9)');
+	$('#selectZoomHover').css('background-color', 'rgba(220, 220, 220, 0.9)');
+	$('#selectZoomHover').css('z-index', '10000');
 
 	chrome.runtime.onMessage.addListener(function(request, sender) { 
 		if (request.action && request.action === 'toggle') {
