@@ -23,3 +23,13 @@ $('.font-size').on('input', function() {
 
 	console.log($(this).val());
 });
+
+
+chrome.storage.sync.get(['settings'], function(response) {
+	settings = response.settings;
+	if (settings) {
+		$('.color').val(settings.color);
+		$('.font-size').val(settings.fontSize);
+		$('.enabled').prop('checked', settings.enabled);
+	}
+});

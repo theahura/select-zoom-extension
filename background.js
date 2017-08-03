@@ -24,6 +24,8 @@
 				chrome.tabs.sendMessage(tabs[i].id, action_obj);
 			}
 		});
+
+		chrome.storage.sync.set({'settings': settings});
 	}
 
 	chrome.runtime.onMessage.addListener(
