@@ -1,24 +1,42 @@
 (function() {
-	var enabled = true;
+	var settings = {
+		enabled: true,
+		fontSize: '50px',
+		color: 'rgb(220, 220, 220)'
+	};
 
-	chrome.browserAction.onClicked.addListener(function() { 
+	function updateSettings(updatedSettings) {
+		console.log(updatedSettings);
+		if (typeof updatedSettings.enabled !== 'undefined')
+			settings.enabled = updatedSettings.enabled;
+		if (updatedSettings.fontSize)
+			settings.fontSize = updatedSettings.fontSize;
+		if (updatedSettings.color)
+			settings.color = updatedSettings.color;
+
+		var action_obj = {
+			action: 'updateSettings',
+			settings: settings
+		};
+
 		chrome.tabs.query({}, function(tabs) {
-			enabled = !enabled;
-			var action = {action: 'toggle', value: enabled};
 			for (var i = 0; i < tabs.length; i++) {
-				chrome.tabs.sendMessage(tabs[i].id, action);
+				chrome.tabs.sendMessage(tabs[i].id, action_obj);
 			}
-
-			if (!enabled) 
-				alert("Disabled vision zoom.");
-			else 
-				alert("Enabled vision zoom.");
 		});
-	});
+	}
 
 	chrome.runtime.onMessage.addListener(
 		function(request, sender, sendResponse) { 
-			sendResponse(enabled);
+			if (request.action === 'getSettings')
+				sendResponse(settings);
+		}
+	);
+
+	chrome.extension.onMessage.addListener(
+		function(request, sender, sendResponse) {
+			if (request.action === 'updateSettings')
+				updateSettings(request);
 		}
 	);
 })();

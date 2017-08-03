@@ -2,7 +2,6 @@
 <html>
   <head>
     <title>Select and Zoom Settings</title>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 		<style>
 
 			ul, li {
@@ -59,15 +58,16 @@
   <body>
 		<ul class='settings'>
 			<li>
-				Font Size: <input type="number" value="50"></br>
+				Font Size: <input class='font-size' type="number" value="50"></br>
 		  </li>
 		  <li>
-				Background: <input type="color" value="#dcdcdc"></br>
+				Background: <input class='color' type="color" value="#dcdcdc"></br>
 			</li>
 			<li>
-				Enabled: <input class='enabled' type="checkbox">
+				Enabled: <input class='enabled' type="checkbox" checked>
 			</li>
 		</ul>
+	<script src='jquery.min.js'></script>
 	<script src='popup.js'></script>
   </body>
 </html>

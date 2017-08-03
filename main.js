@@ -1,12 +1,4 @@
 (function() {
-
-	var enabled = true;
-	var maxLen = 60;
-
-	chrome.runtime.sendMessage({}, function(response) {
-			enabled = response;
-	});
-
 	function getSelectionText() {
 		var text = "";
 		var activeEl = document.activeElement;
@@ -23,30 +15,45 @@
 		return text;
 	}
 
-	$('body').append('<div id="selectZoomHover"></div>');
-	$('#selectZoomHover').css('background-color', 'rgba(220, 220, 220, 0.9)');
-	$('#selectZoomHover').css('z-index', '10000');
-
-	chrome.runtime.onMessage.addListener(function(request, sender) { 
-		if (request.action && request.action === 'toggle') {
-			enabled = request.value;
-
-			if (!enabled)
-				$('#selectZoomHover').hide();
-		}
-	});
-
-	document.onmouseup = document.onkeyup = document.onselectionchange = function() {
-		var selectedText = getSelectionText();
-		if (selectedText) {
-			//if (selectedText.length > maxLen)
-			//	selectedText = selectedText.substr(selectedText.length - maxLen);
-			$('#selectZoomHover').html(selectedText);
-			if (enabled)
-				$('#selectZoomHover').show();
-		} else {
+	function updateSettings(updatedSettings) {
+		console.log(updatedSettings);
+		if (!updatedSettings.enabled)
 			$('#selectZoomHover').hide();
-		}
-	};
+		else if (getSelectionText())
+			$('#selectZoomHover').show();
+		$('#selectZoomHover').css({
+			'background-color': updatedSettings.color,
+			'font-size': parseInt(updatedSettings.fontSize)
+		});
+	}
+
+	// Main starts after getting settings from the settings bar.
+	chrome.runtime.sendMessage({action: 'getSettings'}, function(response) {
+		var settings = response;
+
+		// Update the settings as needed.
+		chrome.runtime.onMessage.addListener(function(request, sender) { 
+			if (request.action && request.action === 'updateSettings') {
+				settings = request.settings;
+				updateSettings(settings);
+			}
+		});
+
+		// Get and show selected text.
+		document.onmouseup = document.onkeyup = document.onselectionchange = function() {
+			var selectedText = getSelectionText();
+			if (selectedText) {
+				$('#selectZoomHover').html(selectedText);
+				if (settings.enabled)
+					$('#selectZoomHover').show();
+			} else {
+				$('#selectZoomHover').hide();
+			}
+		};
+
+		$('body').append('<div id="selectZoomHover"></div>');
+		$('#selectZoomHover').css('z-index', '10000');
+		updateSettings(settings);
+	});
 
 })();
