@@ -5,10 +5,14 @@
 	"description": "This extension displays selected text in larger font size.",
 	"version": "1.0",
 
+	"web_accessible_resources": [
+		"jquery-ui/images/*.png"
+	],
+
 	"content_scripts": [{
 		"matches": ["http://*/*", "https://*/*"],
-		"css": ["main.css"],
-		"js": ["jquery.min.js", "main.js"],
+		"js": ["jquery.min.js", "jquery-ui/jquery-ui.min.js", "main.js"],
+		"css": ["main.css", "jquery-ui/jquery-ui.css"],
 		"run_at": "document_end"
 	}],
 

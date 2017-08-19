@@ -52,7 +52,11 @@
 		};
 
 		$('body').append('<div id="selectZoomHover"></div>');
+		$('#selectZoomHover').draggable();
+		$('#selectZoomHover').resizable();
 		$('#selectZoomHover').css('z-index', '10000');
+		$('.ui-resizable-se').css({'height':'32px', 'width':'32px'});
+
 		updateSettings(settings);
 	});
 
