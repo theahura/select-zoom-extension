@@ -43,7 +43,7 @@
 		document.onmouseup = document.onkeyup = document.onselectionchange = function() {
 			var selectedText = getSelectionText();
 			if (selectedText) {
-				$('#selectZoomHover').html(selectedText);
+				$('#selectZoomHover p').html(selectedText);
 				if (settings.enabled)
 					$('#selectZoomHover').show();
 			} else {
@@ -51,11 +51,10 @@
 			}
 		};
 
-		$('body').append('<div id="selectZoomHover"></div>');
+		$('body').append('<div id="selectZoomHover"><p></p></div>');
 		$('#selectZoomHover').draggable();
 		$('#selectZoomHover').resizable();
 		$('#selectZoomHover').css('z-index', '10000');
-		$('.ui-resizable-se').css({'height':'32px', 'width':'32px'});
 
 		updateSettings(settings);
 	});
